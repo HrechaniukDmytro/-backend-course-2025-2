@@ -1,16 +1,15 @@
-// 1. Константи
-const currency = "UAH";
-const exact_date = "2024-09-10";
+const { URL } = require("url");
 
-// 2. Базова адреса (корінь)
-const baseUrl = "https://bank.gov.ua/ua/open-data/api/ovdp";
+// Константи для запиту
+const currency = "EUR";          // валюта
+const exact_date = "10.09.2024"; // дата у форматі DD.MM.YYYY
 
-// 3. Створюємо URL-об'єкт
-const url = new URL(baseUrl);
+// Базовий URL з параметром json
+const baseUrl = new URL("https://bank.gov.ua/NBU_ovdp?json");
 
-// 4. Додаємо параметри пошуку (query string)
-url.searchParams.append("valcode", currency);
+// Додаємо параметри до URL
+baseUrl.searchParams.append("date", exact_date);
+baseUrl.searchParams.append("val_code", currency);
 
-// 5. Виводимо у консоль
-console.log("Сформований URL:", url.toString());
-
+// Вивід готового URL
+console.log(baseUrl.href);
